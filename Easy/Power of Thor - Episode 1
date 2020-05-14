@@ -3,9 +3,11 @@
 light_x, light_y, initial_tx, initial_ty = [int(i) for i in input().split()]
 currentX = initial_tx
 currentY = initial_ty
+
 while True:
     remaining_turns = int(input()) 
     direction = ""
+    
     if light_y < currentY :
         if light_x < currentX:
             currentX -= 1
@@ -30,10 +32,13 @@ while True:
         elif light_x == currentX:
             currentY += 1
             direction = "S"
+            
     if light_x < currentX and direction == "":
         currentX -= 1
         direction = "W"
+        
     if light_x > currentX and direction == "":
         currentX += 1
         direction = "E"
+        
     print(direction) 
