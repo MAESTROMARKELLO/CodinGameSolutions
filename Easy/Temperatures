@@ -1,0 +1,40 @@
+#In this exercise, you have to analyze records of temperature to find the closest to zero.
+
+temp_plus = []
+temp_minus = []
+n = int(input())
+for i in input().split():
+    t = int(i)
+    if t > 0:
+        temp_plus.append(t)
+    if t < 0:
+         temp_minus.append(t)
+if not temp_plus and not temp_minus:
+    print(0)
+elif not temp_minus:
+    plus_numb = temp_plus[0]
+    for i in temp_plus:
+        if i < plus_numb:
+            plus_numb = i
+    print(plus_numb)
+elif not temp_plus:
+    minus_numb = temp_minus[0]
+    for i in temp_minus:
+        if i > minus_numb:
+            minus_numb = i
+    print(minus_numb)
+else:
+    minus_numb = temp_minus[0]
+    plus_numb = temp_plus[0]
+    for i in temp_minus:
+        if i > minus_numb:
+            minus_numb = i
+    for i in temp_plus:
+        if i < plus_numb:
+            plus_numb = i
+    if -plus_numb > minus_numb:
+        print(plus_numb)
+    elif -plus_numb < minus_numb:
+        print(minus_numb)
+    elif -plus_numb == minus_numb:
+        print(plus_numb)
