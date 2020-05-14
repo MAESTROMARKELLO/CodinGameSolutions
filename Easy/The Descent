@@ -1,0 +1,13 @@
+#Destroy the mountains before your starship collides with one of them. 
+#For that, shoot the highest mountain on your path.
+
+heighest_mountain = 0
+index = 0
+while True:
+    for i in range(8):
+        mountain_h = int(input())
+        if mountain_h > heighest_mountain:
+            heighest_mountain = mountain_h
+            index = i
+    print(index)
+    heighest_mountain = 0
