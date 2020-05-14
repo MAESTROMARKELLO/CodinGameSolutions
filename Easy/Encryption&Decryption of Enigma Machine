@@ -1,0 +1,56 @@
+def swap_values():
+    global message, encoded_message
+    message = "".join(encoded_message)
+    encoded_message = ""
+
+
+def encode(rotor_list):
+    swap_values()
+
+    def pass_rotor(rotor):
+        global message, encoded_message, alphabet
+        for x in message:
+            encoded_message += rotor[alphabet.index(x)]
+
+    for j in range(len(rotor_list)):
+        pass_rotor(rotor_list[j])
+        swap_values()
+
+
+def decode(rotor_list):
+    def pass_rotor(rotor):
+        global message, encoded_message, alphabet
+        for x in message:
+            encoded_message += alphabet[rotor.index(x)]
+    for j in range(len(rotor_list)-1, -1, -1):
+        pass_rotor(rotor_list[j])
+        swap_values()
+
+
+operation = input().upper()
+pseudo_random_number = int(input())
+rotors = ["", "", ""]
+for i in range(3):
+    rotors[i] = input()
+message = list(map(str, input().upper()))
+encoded_message = ""
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+if operation == "ENCODE":
+    for i in message:
+        index = alphabet.index(i) + pseudo_random_number
+        if index > 26:
+            index -= 26
+        encoded_message += alphabet[index]
+        pseudo_random_number += 1
+    encode(rotors)
+    print(message)
+elif operation == "DECODE":
+    decode(rotors)
+    for i in message:
+        index = alphabet.index(i) - pseudo_random_number
+        if index < 0:
+            index += 26
+        encoded_message += alphabet[index]
+        pseudo_random_number += 1
+    swap_values()
+    print(message)
