@@ -3,15 +3,18 @@
 # In order for the race to be interesting, it is necessary to try to select two horses with similar strength.
 # Write a program which, using a given number of strengths, 
 # identifies the two closest strengths and shows their difference with an integer (≥ 0).
+
 list_1 = []
 n = int(input())
+
 for x in range(n):
     list_1.append(int(input()))
+    
 list_1.sort()
 min_dif = abs(list_1[0]- list_1[1])
+
 for i in range(0, len(list_1)-2):
     if abs(list_1[i+1]- list_1[i+2])< min_dif:
         min_dif = abs(list_1[i+1]- list_1[i+2])
-
 
 print(min_dif)
