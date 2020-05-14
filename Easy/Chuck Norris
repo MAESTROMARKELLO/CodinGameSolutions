@@ -4,7 +4,6 @@
 # using Chuck Norris’ method.
 
 MESSAGE = input()
-
 BINARY = ''
 
 for i in range(len(MESSAGE)):
