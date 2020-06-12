@@ -1,0 +1,82 @@
+# An international Rock Paper Scissors Lizard Spock tournament is organized, 
+# all players receive a number when they register.
+# 
+# Each player chooses a sign that he will keep throughout the tournament among:
+# Rock (R)
+# Paper (P)
+# sCissors (C)
+# Lizard (L)
+# Spock (S)
+# 
+# Scissors cuts Paper
+# Paper covers Rock
+# Rock crushes Lizard
+# Lizard poisons Spock
+# Spock smashes Scissors
+# Scissors decapitates Lizard
+# Lizard eats Paper
+# Paper disproves Spock
+# Spock vaporizes Rock
+# Rock crushes Scissors
+# and in case of a tie, the player with the lowest number wins (it's scandalous but it's the rule).
+
+class Player:
+    def __init__(self, number, sign):
+        self.number = number
+        self.sign = sign
+        self.fights = []
+
+    def compare_signs(self, other_player):
+
+        sign_dict = {
+            "R": ["C", "L"],
+            "C": ["P", "L"],
+            "S": ["C", "R"],
+            "L": ["P", "S"],
+            "P": ["R", "S"]
+        }
+
+        def check_number(player1, player2):
+            global player_list
+            if player1.number < player2.number:
+                player1.fights.append(player2.number)
+                player_list.remove(player2)
+            else:
+                player2.fights.append(player1.number)
+                player_list.remove(player1)
+
+        def check_signs(player1, player2):
+            if player1.sign == player2.sign:
+                check_number(player1, player2)
+            else:
+                if player2.sign in sign_dict[player1.sign]:
+                    player1.fights.append(player2.number)
+                    player_list.remove(player2)
+                else:
+                    player2.fights.append(player1.number)
+                    player_list.remove(player1)
+
+        check_signs(self, other_player)
+
+
+n = int(input())
+player_list = []
+x = -1
+for i in range(n):
+    numplayer, signplayer = input().split()
+    numplayer = int(numplayer)
+    player_list.append(Player(numplayer, signplayer))
+while True:
+    if len(player_list) == 1:
+        break
+    x += 1
+    if x < len(player_list)-1:
+         player_list[x].compare_signs(player_list[x+1])
+    else:
+        x = -1
+print(player_list[0].number)
+for i in player_list[0].fights:
+    if i == player_list[0].fights[-1]:
+        print(i, end="")
+    else:
+        print(str(i) + " ", end="")
